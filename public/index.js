@@ -1,5 +1,17 @@
 "use strict";
 
+window.onload = function displayProducts() {
+  let allItems = [];
+  products.forEach((item, index) => {
+    allItems.push(item.name + " - " + item.description);
+  });
+  return (document.getElementById("itemList").innerHTML = allItems
+    .map((item, index) => {
+      return `<li>${item}</li>`;
+    })
+    .join(""));
+};
+
 function searchFunction() {
   // empty array created to hold items found in the search
   let foundItems = [];
