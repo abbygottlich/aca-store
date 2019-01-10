@@ -1,0 +1,48 @@
+body {
+    margin: 0px;
+}
+
+.searchBar {
+    width: 100%;
+    height: 80px;
+    background-color: #B2CEC8;
+    padding-top: 15px;
+}
+
+input {
+    border: none;
+    width: 400px;
+    height: 50px;
+    background-color: transparent;
+    border-bottom: solid #6C7986 1px;
+    font-family: 'Raleway';
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #6C7986;
+}
+
+.button {
+    background-color: #FFFFFF;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    font-family: 'Raleway';
+    text-transform: uppercase;
+    color: #B2CEC8;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
+    margin-left: 15px;
+}
+  
+.button:hover {
+    background-color: #6C7986;
+    color: #FFFFFF;
+}
+
+.bar-button {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
