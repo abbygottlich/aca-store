@@ -11,7 +11,9 @@
 <body>
     <div class="searchBar">
         <div class="bar-button">
-            <input type="text" placeholder="Search" id="search">
+            <div class="dropdown">--Choose--</div>
+            <input type="text" placeholder="I am looking for..." id="search" onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'I am looking for...'">
             <div class="button" onclick="searchFunction()">Search</div>
         </div>
         <ul id="searchedItems"></ul>
