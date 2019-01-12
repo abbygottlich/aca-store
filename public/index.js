@@ -1,5 +1,6 @@
 "use strict";
 
+// -------------- display products on page --------------
 window.onload = function displayProducts() {
   let allItems = [];
   products.forEach((item, index) => {
@@ -12,6 +13,7 @@ window.onload = function displayProducts() {
     .join(""));
 };
 
+// -------------- search products --------------
 function searchFunction() {
   // empty array created to hold items found in the search
   let foundItems = [];
@@ -38,8 +40,45 @@ function searchFunction() {
   return (document.getElementById("searchedItems").innerHTML = foundItems
     .map((item, index) => {
       // return each item as a list item
-      return `<li>${item}</li>`;
+      return `<li>${item}</li>` + ' ' + ;
     })
     // .join gets rid of the comma that is automatically put between each thing being mapped over
     .join(""));
+}
+
+// -------------- show item details --------------
+function showDetails() {
+  document.getElementById("searchedItems").forEach(item) {
+    return `<div>${item.description}<div` + ' ' + document.getElementById("addToCartButton")
+  }
+}
+
+// -------------- count items in shopping cart --------------
+function cartCounter() {
+  if(cart === null){
+    return document.getElementById("counter").innerHTML = 0
+  } else {
+    document.getElementById("counter").innerHTML = cart.length
+  }
+}
+
+// -------------- put items in shopping cart --------------
+let cart = [];
+function addToCart(item) {
+  cart.push(item);
+  sessionStorage.setItem("cart", JSON.stringify(cart));
+  return 
+  goBackHome();
+}
+
+// -------------- show shopping cart --------------
+function showCart() {
+  displayProducts(cart);
+}
+
+// -------------- go back home --------------
+function goBackHome() {
+  addCartButton.style.display = "none";
+  state.currentProductToAdd = null;
+  listProducts(products);
 }
