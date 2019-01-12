@@ -11,14 +11,14 @@
 <body>
     <div class="searchBar">
         <div class="bar-button">
-            <div class="dropdown">--Choose--</div>
+            <button class="dropdown">--Choose--</button>
             <input type="text" placeholder="I am looking for..." id="search" onfocus="this.placeholder = ''"
             onblur="this.placeholder = 'I am looking for...'">
-            <div class="button" onclick="searchFunction()">Search</div>
+            <button class="button" onclick="searchFunction()">Search</button>
         </div>
-        <ul id="searchedItems"></ul>
-        <button id="addToCartButton" onclick="showDetails()">Add to Cart</button>
-        <div id="cart">Cart: <span id="counter"></span></div>
+        <div id="searchedItems"></div>
+        <!-- <button id="addToCartButton" onclick="showDetails()">Add to Cart</button>
+        <div id="cart">Cart: <span id="counter"></span></div> -->
     </div>
     <ul id="itemList"></ul>
      <script src="products.js"></script>    

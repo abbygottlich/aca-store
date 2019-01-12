@@ -8,7 +8,11 @@ window.onload = function displayProducts() {
   });
   return (document.getElementById("itemList").innerHTML = allItems
     .map((item, index) => {
-      return `<li>${item}</li>`;
+      return (
+        `<li>${item}</li>` +
+        " " +
+        `<button onclick="showDetails(${index})">Details</button>`
+      );
     })
     .join(""));
 };
@@ -30,7 +34,7 @@ function searchFunction() {
       // if whatever the user typed is equal to any of the itemNames that you filtered through
       if (searchedItem === itemName) {
         // push the item.name of each ItemName into the foundItems array
-        foundItems.push(item.name);
+        foundItems.push(index);
       }
     });
   });
@@ -38,47 +42,46 @@ function searchFunction() {
   // the element with id="searchedItems" is an unordered list
   // map over each item and index in the foundItems array
   return (document.getElementById("searchedItems").innerHTML = foundItems
-    .map((item, index) => {
+    .map((itemNum, i) => {
+      let product = products[itemNum].name;
+      console.log(product);
       // return each item as a list item
-      return `<li>${item}</li>` + ' ' + ;
+      return (
+        `<li>${product}</li>` +
+        " " +
+        `<button onclick="showDetails(${itemNum})">Details</button>`
+      );
     })
     // .join gets rid of the comma that is automatically put between each thing being mapped over
     .join(""));
 }
 
 // -------------- show item details --------------
-function showDetails() {
-  document.getElementById("searchedItems").forEach(item) {
-    return `<div>${item.description}<div` + ' ' + document.getElementById("addToCartButton")
+function showDetails(index) {
+  let product = products[index];
+  return (document.getElementById("searchedItems").innerHTML = `<div>${
+    product.description
   }
+    </div>`);
 }
 
 // -------------- count items in shopping cart --------------
-function cartCounter() {
-  if(cart === null){
-    return document.getElementById("counter").innerHTML = 0
-  } else {
-    document.getElementById("counter").innerHTML = cart.length
-  }
-}
+// function cartCounter() {
+//   if(cart === null){
+//     return document.getElementById("counter").innerHTML = 0
+//   } else {
+//     document.getElementById("counter").innerHTML = cart.length
+//   }
+// }
 
 // -------------- put items in shopping cart --------------
-let cart = [];
-function addToCart(item) {
-  cart.push(item);
-  sessionStorage.setItem("cart", JSON.stringify(cart));
-  return 
-  goBackHome();
-}
+// let cart = [];
+// function addToCart(item) {
+//   cart.push(item);
+//   sessionStorage.setItem("cart", JSON.stringify(cart));
+// }
 
 // -------------- show shopping cart --------------
-function showCart() {
-  displayProducts(cart);
-}
-
-// -------------- go back home --------------
-function goBackHome() {
-  addCartButton.style.display = "none";
-  state.currentProductToAdd = null;
-  listProducts(products);
-}
+// function showCart() {
+//   displayProducts(cart);
+// }
