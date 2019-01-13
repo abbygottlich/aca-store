@@ -1,6 +1,13 @@
 "use strict";
 
-// -------------- display products on page --------------
+// ---------------------------------- display products on page ----------------------------------
+// When the window loads, create an empty array called 'allItems'.
+// Loop through the products list, and forEach item and index, push
+// the item name plus a dash plus the item description into the allItems array.
+// Return the allItems array and map over it.
+// For every item and index in the allItems array, return the item as a <li>
+// plus the Details button plus the Add To Cart button.
+// Use .join("") to eliminate the commas between each <li>.
 window.onload = function displayProducts() {
   let allItems = [];
   products.forEach((item, index) => {
@@ -11,52 +18,56 @@ window.onload = function displayProducts() {
       return (
         `<li>${item}</li>` +
         " " +
-        `<button onclick="showDetails(${index})">Details</button>`
+        `<button onclick="showDetails(${index})">Details</button>` +
+        " " +
+        `<button onclick="addToCart(${index})">Add To Cart</button>`
       );
     })
     .join(""));
 };
 
-// -------------- search products --------------
+// ---------------------------------- search products ----------------------------------
+// Create an empty array called foundItems to hold items found in the search.
+// Loop over each item and index in products.js.
+// Split each item's name into individual words and store them in the nameArray.
+// Filter through all of the itemNames that you split.
+// Create a variable called searchedItem that equals the value of the input field (what the user types).
+// If whatever the user typed is equal to any of the itemNames that you filtered through,
+// push the item.name of each ItemName into the foundItems array.
 function searchFunction() {
-  // empty array created to hold items found in the search
   let foundItems = [];
-  // loop over each item and index in products.js
   products.forEach((item, index) => {
-    // split each item's name into individual words
     let nameArray = item.name.split(" ");
-    // filter through all of the itemNames that you split
     nameArray.filter(itemName => {
-      // variable created that looks into the HTML and finds the element with id="search"
-      // the element with id="search" is the input field
-      // using .value gives us what the user typed into the input field
       let searchedItem = document.getElementById("search").value;
-      // if whatever the user typed is equal to any of the itemNames that you filtered through
       if (searchedItem === itemName) {
-        // push the item.name of each ItemName into the foundItems array
         foundItems.push(index);
       }
     });
   });
-  // look into the HTML and find the element with id="searchedItems"
-  // the element with id="searchedItems" is an unordered list
-  // map over each item and index in the foundItems array
+  // Look into the HTML and find the element with id="searchedItems".
+  // The element with id="searchedItems" is a div.
+  // Map over each item and index in the foundItems array.
+  // Create a variable 'product' and set it equal to the product's name.
+  // Return each product as a list item plus a Details button plus an Add To Cart button.
+  // Use .join("") to get rid of the commas that are automatically put between each thing being mapped over
   return (document.getElementById("searchedItems").innerHTML = foundItems
     .map((itemNum, i) => {
       let product = products[itemNum].name;
-      console.log(product);
-      // return each item as a list item
       return (
         `<li>${product}</li>` +
         " " +
-        `<button onclick="showDetails(${itemNum})">Details</button>`
+        `<button onclick="showDetails(${itemNum})">Details</button>` +
+        " " +
+        `<button onclick="addToCart(${itemNum})">Add To Cart</button>`
       );
     })
-    // .join gets rid of the comma that is automatically put between each thing being mapped over
     .join(""));
 }
 
-// -------------- show item details --------------
+// ---------------------------------- show item details ----------------------------------
+// Create a variable called 'product' and set it equal to the product itself from the products.js file.
+// Return the product's description to the searchedItems div in the HTML.
 function showDetails(index) {
   let product = products[index];
   return (document.getElementById("searchedItems").innerHTML = `<div>${
@@ -65,23 +76,47 @@ function showDetails(index) {
     </div>`);
 }
 
-// -------------- count items in shopping cart --------------
-// function cartCounter() {
-//   if(cart === null){
-//     return document.getElementById("counter").innerHTML = 0
-//   } else {
-//     document.getElementById("counter").innerHTML = cart.length
-//   }
-// }
+// ---------------------------------- put items in shopping cart ----------------------------------
+// Create an empty array called 'cart'.
+// Create a variable called 'product' and set it equal to the product's name.
+// Push the product whose 'Add To Cart' button was clicked into the cart array.
+// Use sessionStorage to keep everything in the cart even after the page refreshes.
+let cart = [];
+function addToCart(itemNum) {
+  let product = products[itemNum].name;
+  cart.push(product);
+  sessionStorage.setItem("cart", JSON.stringify(cart));
+  console.log(cart);
+}
 
-// -------------- put items in shopping cart --------------
-// let cart = [];
-// function addToCart(item) {
-//   cart.push(item);
-//   sessionStorage.setItem("cart", JSON.stringify(cart));
-// }
+// ---------------------------------- count items in shopping cart ----------------------------------
+// If the cart is empty (null), return a 0 to the counter span in the HTML.
+// Otherwise, return the number of items (cart.length) to the counter span.
+function cartCounter() {
+  if (cart === null) {
+    return (document.getElementById("counter").innerHTML = 0);
+  } else {
+    document.getElementById("counter").innerHTML = cart.length;
+  }
+}
 
-// -------------- show shopping cart --------------
-// function showCart() {
-//   displayProducts(cart);
-// }
+// --------------------------------- show shopping cart ----------------------------------
+// Create a variable called 'product' and set it equal to the product's name.
+// If the cart is empty (null), return 'Your cart is empty.' string to the cart div in the HTML.
+// Otherwise, loop through the items in the cart.
+// ForEach item that's in the cart, return its name to the cart div as a <li>.
+function viewCart() {
+  let product = products[item].name;
+  if (cart === null) {
+    return (document.getElementById(
+      "cart"
+    ).innerHTML = `<div>Your cart is empty.</div>`);
+  } else {
+    cart.forEach(item => {
+      return (document.getElementById("cart").innerHTML = `<li>${
+        item.name
+      }</li>`);
+    });
+  }
+  console.log(cart);
+}
