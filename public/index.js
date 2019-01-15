@@ -86,18 +86,7 @@ function addToCart(itemNum) {
   let product = products[itemNum].name;
   cart.push(product);
   sessionStorage.setItem("cart", JSON.stringify(cart));
-  console.log(cart);
-}
-
-// ---------------------------------- count items in shopping cart ----------------------------------
-// If the cart is empty (null), return a 0 to the counter span in the HTML.
-// Otherwise, return the number of items (cart.length) to the counter span.
-function cartCounter() {
-  if (cart === null) {
-    return (document.getElementById("counter").innerHTML = 0);
-  } else {
-    document.getElementById("counter").innerHTML = cart.length;
-  }
+  // console.log(cart);
 }
 
 // --------------------------------- show shopping cart ----------------------------------
@@ -106,16 +95,14 @@ function cartCounter() {
 // Otherwise, loop through the items in the cart.
 // ForEach item that's in the cart, return its name to the cart div as a <li>.
 function viewCart() {
-  let product = products[item].name;
   if (cart === null) {
+    let item = products[i];
     return (document.getElementById(
       "cart"
     ).innerHTML = `<div>Your cart is empty.</div>`);
   } else {
     cart.forEach(item => {
-      return (document.getElementById("cart").innerHTML = `<li>${
-        item.name
-      }</li>`);
+      return (document.getElementById("cart").innerHTML = `<li>${cart}</li>`);
     });
   }
   console.log(cart);
